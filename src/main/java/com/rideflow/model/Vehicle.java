@@ -1,10 +1,13 @@
 package com.rideflow.model;
 
+import com.rideflow.enums.RideType;
+
 public class Vehicle {
     private String id;
     private String model;
     private String numberPlate;
     private String color;
+    private RideType rideType;
 
     public String getId() {
         return id;
@@ -38,11 +41,20 @@ public class Vehicle {
         this.color = color;
     }
 
-    public Vehicle(String id, String model, String numberPlate, String color ){
+    public RideType getRideType() {
+        return rideType;
+    }
+
+    public void setRideType(RideType rideType) {
+        this.rideType = rideType;
+    }
+
+    public Vehicle(String id, String model, String numberPlate, String color, RideType rideType){
         this.id = id;
         this.model = model;
         this.numberPlate = numberPlate;
         this.color = color;
+        this.rideType = rideType;
 
 
     }

@@ -8,7 +8,9 @@ public final class FeedbackRepositoryChecks {
     public static void main(String[] args) {
         var store = new FeedbackRepository();
         var passenger = new Passenger("p", "Name", "email", "phone", "address");
-        var driver = new Driver("d", "Driver", "email", "phone", "address", "licence", null);
+        var vehicle = new Vehicle("v", "Model", "Plate", "Black", RideType.X);
+        var driver = new Driver("d", "Driver", "email", "phone", "address", "licence", vehicle);
+        driver.goOnline();
         var ride = new Ride("r", passenger, RideType.X);
         ride.accept(driver);
         ride.markDriverArriving();
@@ -34,3 +36,4 @@ public final class FeedbackRepositoryChecks {
         System.out.println("Passed feedback repository checks");
     }
 }
+

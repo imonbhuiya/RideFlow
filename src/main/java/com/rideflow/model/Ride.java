@@ -23,7 +23,9 @@ public final class Ride {
 
     public void accept(Driver driver) {
         requireStatus(RideStatus.SEARCHING);
-        this.driver = Objects.requireNonNull(driver, "Driver is required");
+        Driver selectedDriver = Objects.requireNonNull(driver, "Driver is required");
+        selectedDriver.assignToRide(id, type);
+        this.driver = selectedDriver;
         status = RideStatus.ACCEPTED;
     }
 
@@ -44,6 +46,7 @@ public final class Ride {
 
     public void complete() {
         requireStatus(RideStatus.IN_PROGRESS);
+        driver.releaseFromRide(id);
         status = RideStatus.COMPLETED;
     }
 
@@ -51,6 +54,9 @@ public final class Ride {
         if (status == RideStatus.IN_PROGRESS || status == RideStatus.COMPLETED
                 || status == RideStatus.CANCELLED) {
             throw new IllegalStateException("Cannot cancel ride in status " + status);
+        }
+        if (driver != null) {
+            driver.releaseFromRide(id);
         }
         status = RideStatus.CANCELLED;
     }
@@ -67,3 +73,4 @@ public final class Ride {
     public Driver getDriver() { return driver; }
     public RideStatus getStatus() { return status; }
 }
+

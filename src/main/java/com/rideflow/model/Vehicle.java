@@ -1,6 +1,7 @@
 package com.rideflow.model;
 
 import com.rideflow.enums.RideType;
+import java.util.Objects;
 
 public class Vehicle {
     private String id;
@@ -45,6 +46,11 @@ public class Vehicle {
         return rideType;
     }
 
+    /** Returns whether this vehicle can serve the requested ride category. */
+    public boolean supports(RideType requestedType) {
+        return rideType == Objects.requireNonNull(requestedType, "Ride type is required");
+    }
+
     public void setRideType(RideType rideType) {
         this.rideType = rideType;
     }
@@ -60,3 +66,4 @@ public class Vehicle {
     }
 
 }
+
